@@ -25,5 +25,5 @@ http.createServer(app).listen(port);
 app.use('/', require('./routes/index.js'));
 require('./app/routes.js')(app); // load our routes and pass in our app and fully configured passport
 
-console.log('Server is running on :' + port);
+console.log('Server is running on 1 :' + port);
 
