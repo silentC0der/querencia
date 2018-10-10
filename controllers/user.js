@@ -1,22 +1,18 @@
-var user = require("./userController.js");
-var _ = require('lodash');
-
-// let getUserList =  async (req,res)=>{
-//     let userlist = await user.list();
-//     const value = _.find(userlist, prop => prop.id === 'peter');
-//     res.json(userlist);   
-// }
+const user = require("./userController.js");
+const _ = require('lodash');
 
 let addUser = (req,res)=>{
     let user =  user.addUser(req);
     res.json(user);
 };
 
-//let getUser = (req,res);
-
-
+let getUser = (req,res)=>{
+    let user  = user.getUser(req);
+    res.json(user);
+}
 
 module.exports = {
-    addUser: addUser
+    addUser,
+    getUser
 } 
 

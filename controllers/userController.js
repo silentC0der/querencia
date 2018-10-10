@@ -5,19 +5,8 @@ class UsersDB extends Connection {
     super(connection); //call the parent method with super
     this.db = this.connection;
   }
-  // async list () {
-  //   try {
-  //     var users = await this.db.query("SELECT * FROM tbl_user_master");
-  //     if (!users) {
-  //       return null;
-  //     }
-  //     return await users;
-  //     } catch (error) {
-  //       throw error;
-  //   }
-  // }
-
-   addUser(req){
+ 
+  addUser(req){
     let sql = 'insert into tbl_user_master set ';
     let userObject = {};
     if(req.body.rno){
@@ -67,22 +56,43 @@ class UsersDB extends Connection {
   }
 
   getUser(req){
-    let classType = req.body.class ? req.body.class : '';
-    let yesrOfJoining = req.body.year ? req.body.year : '';
-    let str = req.body.str ? req.body.str : '';
+    let searchCondition = '';
+    let filterCondition = '';
+    let error = {}
+    , retArr = {};
+    
+    // condition for search user bby name 
+    if(req.body.str){
+      searchCondition+= ' and name like %'+req.body.str+'%';
+    }
+
+    // filter condition 
+    if(req.body.utype){
+      filterCondition = ' and user_type = '+req.body.utype+' ';
+    }if(req.body.class){
+      filterCondition = ' and class = '+req.body.class+' ';
+    }
+
     let sql = ' select \n\
                   * \n\
                 from \n\
                   tbl_user_master \n\
                 where \n\
                   active_flag = 1';
-    if(classType){
-      sql+= 'and class = '+sdsd+' '
-    }if(yesrOfJoining){
-
-    }if(str){
-
-    }
+    this.db.query(sql,(err,rows)=>{
+      if(err){
+        error.status = 1;
+        error.ErrMsg = 'error in query';
+        retArr.error = error;
+        return retArr;
+      }else{
+        error.status = 0;
+        error.ErrMsg = 'success';
+        retArr.error = error;
+        retArr.result = rows;
+        return retArr;
+      }
+    });
   }
 
 
