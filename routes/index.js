@@ -7,7 +7,8 @@ var userObj = require('../controllers/user.js');
 router.post('/user',userObj.addUser);   
 router.get('/user', userObj.getUser);
 
-
+var enquiryObj = require('../controllers/enquiry.js');
+router.post('/enquiry',enquiryObj.addEnquiry);
 
 
 
