@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const constants = require('../lib/constants.js');
 const port = 3000;;
 const min = '';
-const version = 1.01;
+const version = 1.02;
 
 module.exports =  (app) => {
     app.get('/',(req,res)=>{
