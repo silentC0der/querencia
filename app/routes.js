@@ -12,6 +12,6 @@ module.exports =  (app) => {
         data.ver = version;
         data.spath = req.protocol + '://' + req.hostname + ':' + port + '/';
         data.contrl = 'homePage';
-        res.render("home.html", { dt: data });
+        res.render("index.html", { dt: data });
     })
 };
